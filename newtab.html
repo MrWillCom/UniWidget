@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <title>New tab</title>
+    <style>
+        body {
+            margin: 0;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-image: url(https://www.yangshangzhen.com/bing/wallpaper);
+            /* background-image: url(https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4ncJa); */
+        }
+
+        .hover {
+            transition: opacity 0.2s;
+            width: 100vw;
+            height: 100%;
+            opacity: 1;
+            backdrop-filter: blur(128px) brightness(0.6);
+        }
+
+        .hover:hover {
+            opacity: 0;
+        }
+
+        @media (prefers-color-scheme: light) {
+            .hover {
+                backdrop-filter: blur(128px) brightness(1.4);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hover"></div>
+</body>
+
+</html>
