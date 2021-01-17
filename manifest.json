@@ -8,7 +8,14 @@
         "48": "img/48.png",
         "128": "img/128.png"
     },
+    "background" : {
+        "scripts": ["background.js"]
+    },
+    "permissions": [
+      "storage"
+    ],
     "chrome_url_overrides": {
         "newtab": "newtab.html"
-    }
+    },
+    "content_security_policy": "script-src 'self' https://cdn.jsdelivr.net; object-src 'self'"
 }
