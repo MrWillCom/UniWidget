@@ -1,4 +1,5 @@
 body {
+    color: var(--txt-color-opacity-controls);
     margin: 0;
     background-repeat: no-repeat;
     background-position: center;
@@ -16,9 +17,17 @@ body {
     --timing-func-slow-down: cubic-bezier(0.2, 0, 0, 1);
 }
 
-.widget-container {
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color-opacity-controls: #00000020;
+        --bg-color-opacity-controls-active: #00000040;
+        --txt-color-opacity-controls: #f5faff;
+    }
+}
+
+.sidebar {
     position: fixed;
-    width: calc((2 * var(--widget-width)) + var(--widget-margin));
+    width: calc((2 * var(--widget-width)) + (4 * var(--widget-margin)));
     top: 0;
     bottom: 0;
     right: -100%;
@@ -26,11 +35,11 @@ body {
     text-align: center;
 }
 
-.widget-container.open {
+.sidebar.open {
     right: 0;
 }
 
-.widget-container #edit {
+.sidebar #edit {
     margin-top: 16px;
     border: none;
     background-color: var(--bg-color-opacity-controls);
@@ -42,11 +51,11 @@ body {
     transition: background-color .15s var(--timing-func-slow-down);
 }
 
-.widget-container #edit:active {
+.sidebar #edit:active {
     background-color: var(--bg-color-opacity-controls-active);
 }
 
-.open-widget-container-btn {
+.open-sidebar-btn {
     position: fixed;
     width: 80px;
     right: 0;
@@ -60,12 +69,42 @@ body {
     transition: width .8s var(--timing-func-slow-down), opacity .8s var(--timing-func-slow-down);
 }
 
-.open-widget-container-btn:hover {
+.open-sidebar-btn:hover {
     width: 160px;
     opacity: 1;
 }
 
-.open-widget-container-btn.hide {
+.open-sidebar-btn.hide {
     opacity: 0;
     pointer-events: none;
+}
+
+.widget-container {
+    text-align: initial;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.widget-container .widget {
+    margin: var(--widget-margin);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px #0004;
+}
+
+.widget-container .widget.acrylic {
+    background-color: var(--bg-color-opacity-controls);
+    backdrop-filter: blur(36px);
+}
+
+.widget-container .widget.small, .widget-container .widget.wide {
+    height: var(--widget-width);
+}
+
+.widget-container .widget.wide, .widget-container .widget.large {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.widget-container .widget.large {
+    height: calc(2 * var(--widget-width) + 2 * var(--widget-margin));
 }

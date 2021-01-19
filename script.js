@@ -1,28 +1,26 @@
-var st = {
-    get: key => new Promise((resolve, reject) => {
-        chrome.runtime.sendMessage({ action: "st.get", key }, (response) => resolve(response))
-    }),
-    set: obj => new Promise((resolve, reject) => {
-        chrome.runtime.sendMessage({ action: "st.set", obj }, (response) => resolve(response))
-    })
-}
-
+var sidebar = document.querySelector(".sidebar");
+var openSidebarBtn = document.querySelector(".open-sidebar-btn");
 var widgetContainer = document.querySelector(".widget-container");
-var openWidgetContainerBtn = document.querySelector(".open-widget-container-btn");
 
-widgetContainer.addEventListener("click", (ev) => {
+sidebar.addEventListener("click", (ev) => {
     ev.stopPropagation();
 })
 
-openWidgetContainerBtn.addEventListener("click", (ev) => {
-    widgetContainer.classList.add("open");
-    openWidgetContainerBtn.classList.add("hide");
+openSidebarBtn.addEventListener("click", (ev) => {
+    sidebar.classList.add("open");
+    openSidebarBtn.classList.add("hide");
     ev.stopPropagation();
 })
 
 document.addEventListener("click", (ev) => {
-    if (widgetContainer.classList.contains("open")) {
-        widgetContainer.classList.remove("open");
-        openWidgetContainerBtn.classList.remove("hide");
+    if (sidebar.classList.contains("open")) {
+        sidebar.classList.remove("open");
+        openSidebarBtn.classList.remove("hide");
+    }
+})
+
+chrome.storage.local.get("widgetsList", (val) => {
+    for (const iterator of val.widgetsList) {
+        RenderWidget(WidgetVariables.InstalledWidgets[iterator]);
     }
 })
