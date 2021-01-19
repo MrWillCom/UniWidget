@@ -20,7 +20,13 @@ document.addEventListener("click", (ev) => {
 })
 
 chrome.storage.local.get("widgetsList", (val) => {
-    for (const iterator of val.widgetsList) {
-        RenderWidget(WidgetVariables.InstalledWidgets[iterator]);
+    if (val.widgetsList) {
+        for (const iterator of val.widgetsList) {
+            RenderWidget(WidgetVariables.InstalledWidgets[iterator]);
+        }
+    }else{
+        chrome.storage.local.set({widgetsList: ["WidgetDate"]}, () => {
+            RenderWidget(WidgetVariables.InstalledWidgets.WidgetDate);
+        });
     }
 })
