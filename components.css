@@ -1,0 +1,7 @@
+.components-title-desc {
+    text-align: center;
+}
+
+.components-title-desc>.title, .components-title-desc>.desc {
+    margin: 8px 0;
+}

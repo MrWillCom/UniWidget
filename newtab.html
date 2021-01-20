@@ -3,16 +3,25 @@
 <head>
     <title>New tab</title>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <link rel="stylesheet" href="components.css">
     <link rel="stylesheet" href="style.css">
     <script src="import.js"></script>
+    <script src="htmlElements.js"></script>
+    <script src="components.js"></script>
 </head>
 
 <body>
     <div class="sidebar">
         <div class="widget-container"></div>
-        <button id="edit">Edit</button>
+        <button class="edit-btn">Edit</button>
+    </div>
+    <div class="dialog">
+        <div class="content"></div>
+        <div class="title"></div>
+        <div class="actions"></div>
     </div>
     <button class="open-sidebar-btn"></button>
+    <script src="dialog.js"></script>
     <script src="widgets/date.js"></script>
     <script src="script.js"></script>
 </body>

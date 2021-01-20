@@ -1,6 +1,7 @@
 var sidebar = document.querySelector(".sidebar");
 var openSidebarBtn = document.querySelector(".open-sidebar-btn");
 var widgetContainer = document.querySelector(".widget-container");
+var editBtn = document.querySelector(".edit-btn");
 
 sidebar.addEventListener("click", (ev) => {
     ev.stopPropagation();
@@ -24,9 +25,17 @@ chrome.storage.local.get("widgetsList", (val) => {
         for (const iterator of val.widgetsList) {
             RenderWidget(WidgetVariables.InstalledWidgets[iterator]);
         }
-    }else{
-        chrome.storage.local.set({widgetsList: ["WidgetDate"]}, () => {
+    } else {
+        chrome.storage.local.set({ widgetsList: ["WidgetDate"] }, () => {
             RenderWidget(WidgetVariables.InstalledWidgets.WidgetDate);
         });
     }
+})
+
+editBtn.addEventListener("click", (ev) => {
+    dialogController.title.set("Edit Widgets");
+    dialogController.actions.clear();
+    dialogController.actions.append("Close", { click: (ev) => { dialogController.close() } });
+    dialogController.content.set(TitleDesc("Edit Widgets", "Add, remove, reorder or resize the widgets."));
+    dialogController.open();
 })
