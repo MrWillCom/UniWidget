@@ -3,8 +3,6 @@ var openSidebarBtn = document.querySelector(".open-sidebar-btn");
 var widgetContainer = document.querySelector(".widget-container");
 var editBtn = document.querySelector(".edit-btn");
 
-var widgetsList;
-
 sidebar.addEventListener("click", (ev) => {
     ev.stopPropagation();
 })
@@ -22,6 +20,7 @@ document.addEventListener("click", (ev) => {
     }
 })
 
+// Copy installed widgets source from chrome.storage to the tab
 chrome.storage.local.get("installedWidgets", (tmp) => {
     const obj = tmp["installedWidgets"];
     if (obj) {
@@ -31,17 +30,9 @@ chrome.storage.local.get("installedWidgets", (tmp) => {
     }
 
     // Render widgets
-    chrome.storage.local.get("widgetsList", (val) => {
-        if (val.widgetsList) {
-            widgetsList = val.widgetsList;
-            for (const iterator of val.widgetsList) {
-                RenderWidget(WidgetVariables.InstalledWidgets[iterator]);
-            }
-        } else {
-            chrome.storage.local.set({ widgetsList: ["WidgetDate"] }, () => {
-                widgetsList = ["WidgetDate"];
-                RenderWidget(WidgetVariables.InstalledWidgets.WidgetDate);
-            });
+    RefreshWidgetsList((list) => {
+        for (const iterator of list) {
+            RenderWidget(WidgetVariables.InstalledWidgets[iterator]);
         }
     })
 })
@@ -52,7 +43,7 @@ editBtn.addEventListener("click", (ev) => {
     dialogController.actions.clear();
     dialogController.actions.append("Close", { click: (ev) => { dialogController.close() } });
     var addedListData = [];
-    for (const item of widgetsList) {
+    for (const item of WidgetVariables.WidgetsList) {
         addedListData.push({
             events: {},
             name: item,
@@ -61,7 +52,15 @@ editBtn.addEventListener("click", (ev) => {
     var installedListData = [];
     for (const i in WidgetVariables.InstalledWidgets) {
         installedListData.push({
-            events: {},
+            events: {
+                "click": (ev) => {
+                    chrome.storage.local.get("widgetsList", (val) => {
+                        val.widgetsList.push(i)
+                        chrome.storage.local.set({ widgetsList: val.widgetsList }, () => {
+                        });
+                    })
+                }
+            },
             name: i,
         })
     }

@@ -1,6 +1,6 @@
 var HTMLElements = {}
 const HTML_TAG_NAMES = [
-    "p", "a",
+    "p", "a", "span",
     "h1", "h2", "h3", "h4", "h5", "h6",
     "hr", "br",
     "div",
@@ -20,7 +20,9 @@ for (const iterator of HTML_TAG_NAMES) {
             tmp.innerHTML = children;
         } else {
             for (const i of children) {
-                tmp.appendChild(i);
+                if (i) {
+                    tmp.appendChild(i);
+                }
             }
         }
         return tmp;

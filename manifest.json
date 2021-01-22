@@ -8,11 +8,13 @@
         "48": "img/48.png",
         "128": "img/128.png"
     },
-    "background" : {
-        "scripts": ["background.js"]
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
     },
     "permissions": [
-      "storage"
+        "storage"
     ],
     "chrome_url_overrides": {
         "newtab": "newtab.html"

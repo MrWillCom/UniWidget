@@ -7,6 +7,7 @@
 }
 
 .components-list>.item {
+    padding: 8px 0;
     border-bottom: 1px solid #fff2;
 }
 
@@ -22,5 +23,5 @@
 
 .components-list>.item>.name {
     margin: 0;
-    padding: 12px 8px;
+    padding: 0 8px;
 }

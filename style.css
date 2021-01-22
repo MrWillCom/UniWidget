@@ -34,6 +34,10 @@ body {
     }
 }
 
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
 .sidebar {
     position: fixed;
     width: calc((2 * var(--widget-width)) + (4 * var(--widget-margin)));
@@ -42,6 +46,7 @@ body {
     right: -100%;
     transition: right .8s var(--timing-func-slow-down);
     text-align: center;
+    overflow-y: auto;
 }
 
 .sidebar.open {
@@ -49,7 +54,7 @@ body {
 }
 
 .sidebar .edit-btn {
-    margin-top: 16px;
+    margin: 16px 0;
     border: none;
     background-color: var(--bg-color-opacity-controls);
     outline: none;

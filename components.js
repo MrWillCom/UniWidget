@@ -8,9 +8,11 @@ function TitleDesc(title, desc) {
 function List(data) {
     var list = [];
     for (const item of data) {
-        list.push(HTMLElements.div({class: "item"}, {}, [
-            HTMLElements.p({class: "name"}, item.events, item.name)
+        list.push(HTMLElements.div({ class: "item" }, {}, [
+            (() => { if (item.leading) { return HTMLElements.span({ class: "leading" }, {}, item.leading) } })(),
+            HTMLElements.span({ class: "name" }, item.events, item.name),
+            (() => { if (item.trailing) { return HTMLElements.span({ class: "trailing" }, {}, item.trailing) } })(),
         ]));
     }
-    return HTMLElements.div({class: "components-list"}, {}, list);
+    return HTMLElements.div({ class: "components-list" }, {}, list);
 }

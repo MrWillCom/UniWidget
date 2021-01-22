@@ -16,7 +16,7 @@ const WidgetConstants = {
 }
 
 var WidgetVariables = {
-    WidgetsCount: 0,
+    WidgetsList: [],
     InstalledWidgets: {},
 }
 
@@ -33,6 +33,20 @@ function InstallWidget(name, source) {
             var tmp = {};
             tmp[name] = JSON.stringify(source);
             chrome.storage.local.set({ installedWidgets: tmp }, () => { })
+        }
+    })
+}
+
+function RefreshWidgetsList(callback) {
+    chrome.storage.local.get("widgetsList", (val) => {
+        if (val.widgetsList) {
+            WidgetVariables.WidgetsList = val.widgetsList;
+            callback(val.widgetsList);
+        } else {
+            chrome.storage.local.set({ widgetsList: ["WidgetDate"] }, () => {
+                WidgetVariables.WidgetsList = ["WidgetDate"];
+                callback(["WidgetDate"]);
+            });
         }
     })
 }
