@@ -5,3 +5,22 @@
 .components-title-desc>.title, .components-title-desc>.desc {
     margin: 8px 0;
 }
+
+.components-list>.item {
+    border-bottom: 1px solid #fff2;
+}
+
+.components-list>.item:hover {
+    background-color: var(--bg-color-solid-hover);
+    border-color: transparent;
+}
+
+.components-list>.item:active {
+    background-color: var(--bg-color-solid-active);
+    border-color: transparent;
+}
+
+.components-list>.item>.name {
+    margin: 0;
+    padding: 12px 8px;
+}

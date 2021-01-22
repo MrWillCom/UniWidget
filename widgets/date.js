@@ -31,4 +31,4 @@ p { margin: 8px; }
         size: WidgetConstants.Sizes.Small,
         acrylic: true,
     }
-))
+), { builtin: true })

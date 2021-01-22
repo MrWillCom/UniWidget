@@ -24,7 +24,21 @@ function AddWidgetToInstalledWidgets(name, source) {
     WidgetVariables.InstalledWidgets[name] = source;
 }
 
+function InstallWidget(name, source) {
+    chrome.storage.local.get("installedWidgets", (val) => {
+        if (val["installedWidgets"]) {
+            val["installedWidgets"][name] = JSON.stringify(source);
+            chrome.storage.local.set({ installedWidgets: val["installedWidgets"] }, () => { })
+        } else {
+            var tmp = {};
+            tmp[name] = JSON.stringify(source);
+            chrome.storage.local.set({ installedWidgets: tmp }, () => { })
+        }
+    })
+}
+
 function RenderWidget(source) {
+    if (typeof source == "string") { source = JSON.parse(source) }
     var frame = document.createElement("iframe");
     frame.src = "about:blank";
     frame.addEventListener("load", (ev) => {
