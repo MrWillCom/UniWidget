@@ -1,6 +1,6 @@
 var HTMLElements = {}
 const HTML_TAG_NAMES = [
-    "p", "a", "span",
+    "p", "a", "span", "i",
     "h1", "h2", "h3", "h4", "h5", "h6",
     "hr", "br",
     "div",

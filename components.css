@@ -21,6 +21,11 @@
     border-color: transparent;
 }
 
+.components-list>.item>.leading {
+    padding: 0 8px;
+    padding-left: 16px;
+}
+
 .components-list>.item>.name {
     margin: 0;
     padding: 0 8px;

@@ -17,6 +17,8 @@ body {
     --bg-color-solid-hover: #f0f0f0;
     --bg-color-solid-active: #e6e6e6;
     --txt-color-opacity-controls: #4c4f52;
+    --colors-red: #f92727;
+    --colors-green: #0dde0d;
     --border-radius-small: 4px;
     --border-radius-medium: 8px;
     --timing-func-slow-down: cubic-bezier(0.2, 0, 0, 1);
@@ -31,7 +33,17 @@ body {
         --bg-color-solid-hover: #202020;
         --bg-color-solid-active: #404040;
         --txt-color-opacity-controls: #f5faff;
+        --colors-red: #ce0013;
+        --colors-green: #00c300;
     }
+}
+
+.text-red {
+    color: var(--colors-red);
+}
+
+.text-green {
+    color: var(--colors-green);
 }
 
 .sidebar::-webkit-scrollbar {
@@ -55,6 +67,7 @@ body {
 
 .sidebar .edit-btn {
     margin: 16px 0;
+    margin-bottom: 64px;
     border: none;
     background-color: var(--bg-color-opacity-controls);
     outline: none;
@@ -134,6 +147,7 @@ body {
     width: 720px;
     max-width: calc(100vw - 16px);
     height: 640px;
+    max-height: calc(100vh - 16px);
     position: fixed;
     top: 100%;
     left: 50%;
@@ -154,7 +168,8 @@ body {
 }
 
 .dialog>.content {
-    padding: 50px 16px;
+    margin: 50px 0;
+    padding: 0 16px;
     font-size: 16px;
     width: 100%;
     overflow: auto;

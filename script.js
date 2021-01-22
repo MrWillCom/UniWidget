@@ -43,25 +43,36 @@ editBtn.addEventListener("click", (ev) => {
     dialogController.actions.clear();
     dialogController.actions.append("Close", { click: (ev) => { dialogController.close() } });
     var addedListData = [];
-    for (const item of WidgetVariables.WidgetsList) {
+    for (const i in WidgetVariables.WidgetsList) {
+        //     ^
+        // The static `i` may not change when removing widgets, I gonna make an event listener.
         addedListData.push({
-            events: {},
-            name: item,
+            events: {
+                "click": (ev) => {
+                    WidgetVariables.WidgetsList.splice(i, 1);
+                    chrome.storage.local.set({ widgetsList: WidgetVariables.WidgetsList }, () => {
+                        ev.target.parentNode.removeChild(ev.target);
+                    });
+                }
+            },
+            leading: [HTMLElements.i({ class: "bi bi-dash-circle-fill text-red" }, {}, [])],
+            name: WidgetVariables.WidgetsList[i],
         })
     }
     var installedListData = [];
-    for (const i in WidgetVariables.InstalledWidgets) {
+    for (const item in WidgetVariables.InstalledWidgets) {
         installedListData.push({
             events: {
                 "click": (ev) => {
                     chrome.storage.local.get("widgetsList", (val) => {
-                        val.widgetsList.push(i)
+                        val.widgetsList.push(item)
                         chrome.storage.local.set({ widgetsList: val.widgetsList }, () => {
                         });
                     })
                 }
             },
-            name: i,
+            leading: [HTMLElements.i({ class: "bi bi-plus-circle-fill text-green" }, {}, [])],
+            name: item,
         })
     }
     dialogController.content.set(HTMLElements.div({}, {}, [
